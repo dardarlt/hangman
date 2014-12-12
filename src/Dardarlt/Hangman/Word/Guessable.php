@@ -13,7 +13,8 @@ class Guessable
 
     public function getSchema()
     {
-        return str_split($this->guessable);
+        $word =  str_split($this->guessable);
+        return array_combine($word, $word);
     }
 }
  

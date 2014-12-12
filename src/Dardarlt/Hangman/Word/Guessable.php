@@ -13,7 +13,7 @@ class Guessable
 
     public function getSchema()
     {
-        return ['t' => 'a'];
+        return str_split($this->guessable);
     }
 }
  

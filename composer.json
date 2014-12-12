@@ -22,7 +22,8 @@
     "require-dev": {
         "sensio/generator-bundle": "~2.3",
         "phpunit/phpunit": "4.3.*",
-        "whatthejeff/nyancat-phpunit-resultprinter": "~1.2"
+        "whatthejeff/nyancat-phpunit-resultprinter": "~1.2",
+        "mockery/mockery": "dev-master"
     },
     "scripts": {
         "post-root-package-install": [

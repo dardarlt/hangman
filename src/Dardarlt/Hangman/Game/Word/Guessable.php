@@ -1,6 +1,6 @@
 <?php
 
-namespace Dardarlt\Hangman\Word;
+namespace Dardarlt\Hangman\Game\Word;
 
 class Guessable
 {

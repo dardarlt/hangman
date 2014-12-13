@@ -3,6 +3,8 @@
 namespace Dardarlt\Hangman\Game\Word;
 
 use Dardarlt\Hangman\Game\Exception\GuessFailedException;
+use Dardarlt\Hangman\Game\Exception\LetterExistsException;
+use Dardarlt\Hangman\Game\Validation;
 
 /**
  * Class Guessable
@@ -13,16 +15,20 @@ use Dardarlt\Hangman\Game\Exception\GuessFailedException;
 class Guessable
 {
     protected $word;
-    protected $schema;
     protected $state;
 
-    public function __construct(Word $word, $state = null)
+    /**
+     * @param Word $word original word object
+     * @param array $state represents current game state
+     *
+     * We do not pass any state, if word is newly created as it does not have any
+     */
+    public function __construct(Word $word, array $state = null)
     {
         $this->word = $word;
-        $this->schema = clone($word);
 
-        if (null === $this->state) {
-            $this->state = $this->schema->getMask();
+        if (null === $state) {
+            $this->state = $this->word->getMask();
         } else {
             $this->state = $state;
         }
@@ -30,6 +36,15 @@ class Guessable
 
     public function guess($letter)
     {
+        if ($this->hasStateLetter($letter)) {
+            throw new LetterExistsException(
+                sprintf(
+                    "Letter %s already exists in current word.",
+                    $letter
+                )
+            );
+        }
+
         if ($this->word->hasLetter($letter)) {
             $this->updateSchemaWithLetter($letter);
         }
@@ -57,5 +72,10 @@ class Guessable
     public function getRepresentation()
     {
         return $this->state;
+    }
+
+    protected function hasStateLetter($letter)
+    {
+        return Validation::hasLetter($letter, $this->state);
     }
 }

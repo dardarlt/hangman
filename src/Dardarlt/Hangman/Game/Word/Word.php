@@ -2,6 +2,8 @@
 
 namespace Dardarlt\Hangman\Game\Word;
 
+use Dardarlt\Hangman\Game\Validation;
+
 /**
  * Class Word
  * @package Dardarlt\Hangman\Game\Word
@@ -24,7 +26,7 @@ class Word
         $this->word = strtolower($word);
 
         if (!isset($this->schema)) {
-            $this->createSchema();
+            $this->createDefaultObject();
         }
     }
 
@@ -33,9 +35,9 @@ class Word
         return $this->schema;
     }
 
-    public function createSchema()
+    public function createDefaultObject()
     {
-        $word =  str_split($this->word);
+        $word =  Helper::wordToSchema($this->word);
         $this->mask = array_fill(0, count($word), self::MASK);
         $this->schema = $word;
     }
@@ -47,6 +49,6 @@ class Word
 
     public function hasLetter($letter)
     {
-        return in_array(strtolower($letter), $this->getSchema());
+        return Validation::hasLetter($letter, $this->getSchema());
     }
 }

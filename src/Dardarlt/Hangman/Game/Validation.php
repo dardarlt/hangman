@@ -13,4 +13,9 @@ class Validation
 
         return true;
     }
+
+    public static function hasLetter($letter, array $array)
+    {
+        return in_array(strtolower($letter), $array);
+    }
 }

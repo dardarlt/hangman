@@ -4,6 +4,7 @@
 namespace Dardarlt\Hangman\Game;
 
 use Dardarlt\Hangman\Game\Word\Guessable;
+use Dardarlt\Hangman\Game\Validation;
 
 class Guessing
 {
@@ -16,14 +17,13 @@ class Guessing
 
     public function addLetter($letter)
     {
-        $this->validate($letter);
-        $this->guessable->guess($letter);
+        if ($this->validate($letter)) {
+            $this->guessable->guess($letter);
+        }
     }
 
     protected function validate($letter)
     {
-        if (!preg_match('/^[a-z]$/', $letter)) {
-            throw new \InvalidArgumentException('This symbol is not allowed.');
-        }
+        return Validation::input($letter);
     }
 }

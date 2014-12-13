@@ -1,3 +1,7 @@
+dardarlt_hangman:
+    resource: "@DardarltHangmanBundle/Resources/config/routing.yml"
+    prefix:   /
+
 app:
     resource: @AppBundle/Controller/
     type:     annotation

@@ -1,0 +1,4 @@
+services:
+#    dardarlt_hangman.example:
+#        class: Dardarlt\Bundle\HangmanBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]

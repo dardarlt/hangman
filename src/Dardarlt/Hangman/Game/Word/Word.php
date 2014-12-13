@@ -17,7 +17,7 @@ class Word
 
     protected $mask;
 
-    CONST MASK = '.';
+    const MASK = '.';
 
     public function __construct($word)
     {

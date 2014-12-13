@@ -1,0 +1,3 @@
+dardarlt_hangman_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: DardarltHangmanBundle:Default:index }

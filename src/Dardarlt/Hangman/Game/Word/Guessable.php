@@ -4,17 +4,19 @@ namespace Dardarlt\Hangman\Game\Word;
 
 class Guessable
 {
-    protected $guessable;
+    protected $original;
+    protected $schema;
 
-    public function __construct($guessable)
+    public function __construct(Original $original)
     {
-        $this->guessable = $guessable;
+        $this->original = $original;
     }
 
-    public function getSchema()
+    public function guess($letter)
     {
-        $word =  str_split($this->guessable);
-        return array_combine($word, $word);
+        if ($this->original->hasLetter($letter)) {
+            $this->addLetter($letter);
+        }
     }
 }
  

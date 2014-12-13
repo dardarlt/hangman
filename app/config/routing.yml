@@ -1,6 +1,6 @@
 dardarlt_hangman:
     resource: "@DardarltHangmanBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /api
 
 app:
     resource: @AppBundle/Controller/

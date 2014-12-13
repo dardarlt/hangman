@@ -3,12 +3,12 @@
 
 namespace Dardarlt\Hangman\Tests\Game;
 
-
 use Dardarlt\Hangman\Game\Word\Guessable;
 use Dardarlt\Hangman\Game\Guessing;
 use Dardarlt\Hangman\Game\Word\Original;
 
-class GuessingTest extends \PHPUnit_Framework_TestCase {
+class GuessingTest extends \PHPUnit_Framework_TestCase
+{
 
 
     /**
@@ -23,4 +23,3 @@ class GuessingTest extends \PHPUnit_Framework_TestCase {
         $guessing->addLetter('-');
     }
 }
- 

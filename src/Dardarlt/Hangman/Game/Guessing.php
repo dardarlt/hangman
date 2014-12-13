@@ -3,7 +3,6 @@
 
 namespace Dardarlt\Hangman\Game;
 
-
 use Dardarlt\Hangman\Game\Word\Guessable;
 
 class Guessing

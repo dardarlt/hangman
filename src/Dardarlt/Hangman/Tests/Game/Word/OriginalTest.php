@@ -1,7 +1,10 @@
 <?php
 
 
-class OriginalTest extends \PHPUnit_Framework_TestCase {
+namespace Dardarlt\Hangman\Tests\Game\Word;
+
+class OriginalTest extends \PHPUnit_Framework_TestCase
+{
 
     public function testWorks()
     {
@@ -58,4 +61,3 @@ class OriginalTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals($expectedResult, $original->hasLetter($letter));
     }
 }
- 

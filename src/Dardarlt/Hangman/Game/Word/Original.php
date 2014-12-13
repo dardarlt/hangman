@@ -28,4 +28,3 @@ class Original
         return in_array(strtolower($letter), $this->getSchema());
     }
 }
- 

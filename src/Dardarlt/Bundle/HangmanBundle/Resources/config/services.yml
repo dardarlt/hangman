@@ -1,4 +1,5 @@
 services:
-#    dardarlt_hangman.example:
-#        class: Dardarlt\Bundle\HangmanBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]
+    hm.game_manager:
+        class: Dardarlt\Bundle\HangmanBundle\Manager\GameManager
+        arguments: ["@doctrine.orm.default_entity_manager"]
+

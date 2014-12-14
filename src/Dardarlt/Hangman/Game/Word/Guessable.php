@@ -53,6 +53,7 @@ class Guessable
             if ($this->getWord() === $this->getState()) {
                 throw new GameIsWonException('Game ended. You won.');
             }
+            return null;
         }
 
         throw new GuessFailedException(

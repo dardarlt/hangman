@@ -56,7 +56,7 @@ class GamesController extends Controller
         $gameEntity = $this->get('hm.storage_manager')->get($id);
 
         if (!$gameEntity) {
-            throw $this->createNotFoundException('Game does not exist');
+            return $this->notFoundResponse('Game does not exist');
         }
 
         $hangman =  $this->get('hm.hangman_manager')->game(
@@ -79,7 +79,7 @@ class GamesController extends Controller
         $letter = $request->request->get('char');
 
         if (!$gameEntity) {
-            throw $this->createNotFoundException('Game does not exist');
+            return $this->notFoundResponse('Game does not exist');
         }
 
         $hangman =  $this->get('hm.hangman_manager')->guess(
@@ -126,5 +126,15 @@ class GamesController extends Controller
             ->setTries($hangman->getTries())
             ->setStatus($hangman->getStatus());
         return $gameEntity;
+    }
+
+    private function notFoundResponse($message)
+    {
+        return new JsonResponse(
+            [
+                'error' => true,
+                'message' => $message
+            ]
+        );
     }
 }

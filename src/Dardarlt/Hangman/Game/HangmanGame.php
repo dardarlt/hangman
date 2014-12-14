@@ -46,12 +46,10 @@ class HangmanGame implements \JsonSerializable, StorableInterface
                 $this->checkTries();
                 $this->guessable->guess($letter);
                 $this->setStatus(self::BUSY);
-                $this->tries--;
                 return null;
 
             } catch (GameIsWonException $e) {
                 $this->setStatus(self::SUCCESS);
-                $this->tries--;
                 return null;
 
             } catch (LetterExistsException $e) {

@@ -63,7 +63,7 @@ class HangmanTest extends WebTestCase
 
         return [
             [
-                'Nyan', 'N...', 'a', 9, 8
+                'Nyan', 'N...', 'y', 9, 9
             ],
             [
                 'Nyan', 'N...', 'b', 9, 8
@@ -92,7 +92,11 @@ class HangmanTest extends WebTestCase
         $dictionary = $this->getDictionaryStub();
 
         $hangmanService = new Hangman($dictionary);
-        $this->assertEquals($expectedTries, $hangmanService->guess($word, $state, $letter, $tries)->getTries());
+        $this->assertEquals(
+            $expectedTries,
+            $hangmanService->guess($word, $state, $letter, $tries)->getTries(),
+            "Tries counting failed with parameters: " . var_export([$word, $state, $letter, $tries, $expectedTries], true)
+        );
     }
 
     public function testGuessReturnsLetterIsGuessed()

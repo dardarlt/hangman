@@ -68,7 +68,7 @@ class GuessableTest extends \PHPUnit_Framework_TestCase
     /**
      * @expectedException \Dardarlt\Hangman\Game\Exception\GameIsWonException
      */
-    public function testGameIsWon()
+    public function testFullWordIsGuessed()
     {
         $guessable = new Guessable(new Word('Nyan'), ['n', 'y', '.', 'n']);
         $guessable->guess('a');

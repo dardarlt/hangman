@@ -1,5 +1,6 @@
 <?php
-namespace Nfq\DemoReusableBundle\Tests\Functional\DependencyInjection;
+namespace Dardarlt\Bundle\HangmanBundle\Tests\Functional;
+
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class ServiceCreationTest extends WebTestCase

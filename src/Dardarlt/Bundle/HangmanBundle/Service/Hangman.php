@@ -54,13 +54,13 @@ class Hangman
      * @param $state
      * @param $letter
      *
-     * @return Hangmangame
+     * @return HangmanGame
      */
     public function guess($word, $state, $letter, $tries)
     {
         $guessable = new Guessable(new Word($word), Helper::wordToSchema($state));
 
-        $hangmangame = new Hangmangame($guessable);
+        $hangmangame = new HangmanGame($guessable);
         $hangmangame->setTries($tries);
         $hangmangame->addLetter($letter);
 

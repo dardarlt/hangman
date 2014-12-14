@@ -54,7 +54,7 @@ class Game
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -77,7 +77,7 @@ class Game
     /**
      * Get word
      *
-     * @return string 
+     * @return string
      */
     public function getWord()
     {
@@ -100,7 +100,7 @@ class Game
     /**
      * Get state
      *
-     * @return string 
+     * @return string
      */
     public function getState()
     {
@@ -123,7 +123,7 @@ class Game
     /**
      * Get tries
      *
-     * @return integer 
+     * @return integer
      */
     public function getTries()
     {
@@ -146,7 +146,7 @@ class Game
     /**
      * Get dateAdded
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDateAdded()
     {

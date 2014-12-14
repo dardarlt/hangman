@@ -41,8 +41,6 @@ class HangmanGame implements \JsonSerializable, StorableInterface
     public function addLetter($letter)
     {
         if ($this->validate($letter)) {
-
-
             try {
                 $this->checkTries();
                 $this->guessable->guess($letter);

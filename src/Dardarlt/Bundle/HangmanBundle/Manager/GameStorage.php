@@ -41,6 +41,9 @@ class GameStorage
         return $this->entityManager->getRepository('DardarltHangmanBundle:Game');
     }
 
+    /**
+     * @param GameEntity $entity
+     */
     protected function saveEntity($entity)
     {
         $this->entityManager->persist($entity);

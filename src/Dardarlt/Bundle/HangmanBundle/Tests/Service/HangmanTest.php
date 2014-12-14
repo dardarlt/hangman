@@ -1,11 +1,14 @@
 <?php
 
+namespace Dardarlt\Bundle\HangmanBundle\Tests\Service;
+
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 use \Mockery as m;
 use \Dardarlt\Bundle\HangmanBundle\Service\Hangman;
 
-class HangmanTest extends WebTestCase {
+class HangmanTest extends WebTestCase
+{
 
     public function testNewGameIsCreated()
     {
@@ -55,7 +58,7 @@ class HangmanTest extends WebTestCase {
         $this->assertInstanceOf('\Dardarlt\Hangman\Game\HangmanGame', $hangmanService->game('Nyan', '....'));
     }
 
-    public function HangmanGuessTriesProvider()
+    public function hangmanGuessTriesProvider()
     {
 
         return [
@@ -120,4 +123,3 @@ class HangmanTest extends WebTestCase {
         return $this->getMock('Dardarlt\Bundle\HangmanBundle\Service\Dictionary');
     }
 }
- 

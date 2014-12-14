@@ -61,12 +61,7 @@ class HangmanGame implements \JsonSerializable, StorableInterface
             } catch (GuessFailedException $e) {
                 $this->setStatus(self::BUSY);
                 $this->tries--;
-
-                try {
-                    $this->checkTries();
-                } catch (NoTriesLeftException $e) {
-                    $this->setStatus(self::FAIL);
-                }
+                $this->checkGameIsEnded();
 
                 return null;
 
@@ -158,5 +153,14 @@ class HangmanGame implements \JsonSerializable, StorableInterface
     public function getWordAsString()
     {
         return implode('', $this->guessable->getWord());
+    }
+
+    protected function checkGameIsEnded()
+    {
+        try {
+            $this->checkTries();
+        } catch (NoTriesLeftException $e) {
+            $this->setStatus(self::FAIL);
+        }
     }
 }

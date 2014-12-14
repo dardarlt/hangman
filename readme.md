@@ -10,9 +10,12 @@ This app is build on symfony 2
 Installation instructions
 ----------
 Change config/parameters.yml  to meet your database requirements
+
 Run 
 ```composer update```
+
 Run 
 ```php app/console doctrine:schema:update --force```
+
 
 

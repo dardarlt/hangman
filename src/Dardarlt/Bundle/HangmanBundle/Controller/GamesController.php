@@ -19,7 +19,7 @@ class GamesController extends Controller
         /** @var HangmanGame $hangman */
         $hangman =  $this->get('hm.hangman_manager')->newGame();
 
-        $gameEntity = $this->createGameEntity($hangman);
+        $gameEntity = $this->convertGameEntity($hangman);
         
         return new JsonResponse(
             [

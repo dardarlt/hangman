@@ -35,8 +35,8 @@ class Hangman
     }
 
     /**
-     * @param $word
-     * @param $state
+     * @param string $word
+     * @param string $state
      *
      * @return HangmanGame
      */

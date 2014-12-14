@@ -149,6 +149,9 @@ class HangmanTest extends WebTestCase
         );
     }
 
+    /**
+     * @return \Dardarlt\Bundle\HangmanBundle\Service\Dictionary
+     */
     protected function getDictionaryStub()
     {
         return $this->getMock('Dardarlt\Bundle\HangmanBundle\Service\Dictionary');

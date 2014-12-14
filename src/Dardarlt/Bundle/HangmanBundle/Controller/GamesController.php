@@ -4,9 +4,7 @@ namespace Dardarlt\Bundle\HangmanBundle\Controller;
 
 use Dardarlt\Bundle\HangmanBundle\Entity\Game;
 use Dardarlt\Hangman\Game\HangmanGame;
-use Dardarlt\Hangman\Game\Word\Guessable;
 use Dardarlt\Hangman\Game\Word\StorableInterface;
-use Dardarlt\Hangman\Game\Word\Word;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;

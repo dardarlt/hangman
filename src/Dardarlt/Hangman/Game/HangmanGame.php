@@ -127,7 +127,7 @@ class HangmanGame implements \JsonSerializable, StorableInterface
     public function jsonSerialize()
     {
         return [
-                'word' => $this->guessable->getState(),
+                'word' => $this->getStateAsString(),
                 'tries_left' => $this->getTries(),
                 'status' => $this->getStatus()
             ];

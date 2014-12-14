@@ -44,6 +44,10 @@ class GamesController extends Controller
     {
         $gameEntity = $this->get('hm.storage_manager')->get($id);
 
+        if (!$gameEntity) {
+            throw $this->createNotFoundException('Game does not exist');
+        }
+
         $hangman =  $this->get('hm.hangman_manager')->game(
             $gameEntity->getWord(),
             $gameEntity->getState()
@@ -54,6 +58,12 @@ class GamesController extends Controller
 
     public function guessAction($id)
     {
+        $gameEntity = $this->get('hm.storage_manager')->get($id);
+
+        if (!$gameEntity) {
+            throw $this->createNotFoundException('Game does not exist');
+        }
+
         return new JsonResponse('works');
     }
 

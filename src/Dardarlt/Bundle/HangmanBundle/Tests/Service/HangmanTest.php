@@ -103,6 +103,14 @@ class HangmanTest extends WebTestCase
         $this->assertEquals('N.a.', $hangmanService->guess('Nyan', 'N...', 'a', 9)->getStateAsString());
     }
 
+    public function testGuessReturnsOriginalWork()
+    {
+        $dictionary = $this->getDictionaryStub();
+
+        $hangmanService = new Hangman($dictionary);
+        $this->assertEquals('nyan', $hangmanService->guess('Nyan', 'N...', 'a', 9)->getWordAsString());
+    }
+
     public function testGuessReturnsGameFailed()
     {
         $hangmanService = new Hangman($this->getDictionaryStub());

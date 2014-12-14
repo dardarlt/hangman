@@ -4,14 +4,19 @@ namespace Dardarlt\Bundle\HangmanBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class DefaultControllerTest extends WebTestCase
+class GameControllerTest extends WebTestCase
 {
     public function testIndex()
     {
         $client = static::createClient();
 
-        $crawler = $client->request('GET', '/api/hello/Fabien');
-
-//        $this->assertTrue($crawler->filter('html:contains("Hello Fabien")')->count() > 0);
+        $crawler = $client->request('POST', '/api/games');
+        var_dump($crawler);
+        $this->assertTrue(
+            $client->getResponse()->headers->contains(
+                'Content-Type',
+                'application/json'
+            )
+        );
     }
 }

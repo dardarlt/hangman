@@ -15,11 +15,10 @@ class Dictionary
         return $words[$randomize];
     }
 
-
     public function getDictionary()
     {
         $finder = new Finder();
-        $finder->files()->in(__DIR__ . '/../Resources/dict/' );
+        $finder->files()->in(__DIR__ . '/../Resources/dict/');
 
         $file = '';
         foreach ($finder as $file) {

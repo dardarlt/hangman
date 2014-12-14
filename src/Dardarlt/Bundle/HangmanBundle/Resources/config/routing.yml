@@ -1,3 +1,19 @@
-dardarlt_hangman_homepage:
-    path:     /hello/{name}
-    defaults: { _controller: DardarltHangmanBundle:Default:index }
+dardarlt_hangman_new_game:
+    path:     /games
+    defaults: { _controller: DardarltHangmanBundle:Games:newGame }
+    methods:  [POST]
+
+dardarlt_hangman_overview:
+    path:     /games
+    defaults: { _controller: DardarltHangmanBundle:Games:overview }
+    methods:  [GET]
+
+dardarlt_hangman_game:
+    path:     /games/{id}
+    defaults: { _controller: DardarltHangmanBundle:Games:game }
+    methods:  [GET]
+
+dardarlt_hangman_guess:
+    path:     /games/{id}
+    defaults: { _controller: DardarltHangmanBundle:Games:guess }
+    methods:  [POST]

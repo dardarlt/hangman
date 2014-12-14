@@ -1,6 +1,6 @@
 services:
     hm.storage_manager:
-        class: Dardarlt\Bundle\HangmanBundle\Manager\StorageManager
+        class: Dardarlt\Bundle\HangmanBundle\Manager\GameStorage
         arguments: ["@doctrine.orm.default_entity_manager"]
 
     hm.dictionary:

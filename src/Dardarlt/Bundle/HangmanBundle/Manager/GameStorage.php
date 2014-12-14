@@ -5,7 +5,7 @@ namespace Dardarlt\Bundle\HangmanBundle\Manager;
 use Dardarlt\Bundle\HangmanBundle\Entity\Game as GameEntity;
 use Doctrine\ORM\EntityManager;
 
-class GameManager
+class GameStorage
 {
 
     private $entityManager;
@@ -20,15 +20,25 @@ class GameManager
         $this->saveEntity($game);
     }
 
+    public function storeAndReturnId(GameEntity $game)
+    {
+        $this->saveEntity($game);
+        return $game->getId();
+    }
+
+    public function getAllGames()
+    {
+        return $this->getRepository()->findAll();
+    }
+    
     public function get($id)
     {
-        return $this->getRepository()->findById($id);
+        return $this->getRepository()->find($id);
     }
 
     protected function getRepository()
     {
-        return $this->entityManager->getDoctrine()
-            ->getRepository('DardarltHangmanBundle:Game');
+        return $this->entityManager->getRepository('DardarltHangmanBundle:Game');
     }
 
     protected function saveEntity($entity)

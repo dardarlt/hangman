@@ -9,9 +9,13 @@ use Dardarlt\Hangman\Game\Word\StorableInterface;
 use Dardarlt\Hangman\Game\Word\Word;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 
 class GamesController extends Controller
 {
+    /**
+     * @return JsonResponse
+     */
     public function newGameAction()
     {
         /** @var HangmanGame $hangman */
@@ -22,11 +26,15 @@ class GamesController extends Controller
         return new JsonResponse(
             [
                 'id' =>  $this->get('hm.storage_manager')->storeAndReturnId($gameEntity),
-                'word' => $hangman->getStateAsString()
+                'word' => $hangman->getStateAsString(),
+                'status' => $hangman->getStatus()
             ]
         );
     }
 
+    /**
+     * @return JsonResponse
+     */
     public function overviewAction()
     {
 
@@ -40,6 +48,11 @@ class GamesController extends Controller
         return new JsonResponse($games);
     }
 
+    /**
+     * @param $id
+     *
+     * @return JsonResponse
+     */
     public function gameAction($id)
     {
         $gameEntity = $this->get('hm.storage_manager')->get($id);
@@ -56,15 +69,45 @@ class GamesController extends Controller
         return new JsonResponse($hangman->jsonSerialize());
     }
 
-    public function guessAction($id)
+    /**
+     * @param $id
+     * @param Request $request
+     *
+     * @return JsonResponse
+     */
+    public function guessAction($id, Request $request)
     {
         $gameEntity = $this->get('hm.storage_manager')->get($id);
+        $letter = $request->request->get('char');
 
         if (!$gameEntity) {
             throw $this->createNotFoundException('Game does not exist');
         }
 
-        return new JsonResponse('works');
+        $hangman =  $this->get('hm.hangman_manager')->guess(
+            $gameEntity->getWord(),
+            $gameEntity->getState(),
+            $letter,
+            $gameEntity->getTries()
+        );
+
+        $gameEntity
+            ->setState($hangman->getStateAsString())
+            ->setStatus($hangman->getStatus())
+            ->setTries($hangman->getTries());
+
+        $this
+            ->get('hm.storage_manager')
+            ->store($gameEntity)
+        ;
+
+        return new JsonResponse(
+            [
+                'word' => $hangman->getStateAsString(),
+                'tries' => $hangman->getTries(),
+                'status' => $hangman->getStatus()
+            ]
+        );
     }
 
     protected function convertEntityToArray(Game $game)
@@ -76,7 +119,7 @@ class GamesController extends Controller
         ];
     }
 
-    protected function createGameEntity(StorableInterface $hangman)
+    protected function convertGameEntity(StorableInterface $hangman)
     {
         $gameEntity = new Game();
         $gameEntity

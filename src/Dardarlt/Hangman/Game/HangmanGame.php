@@ -3,6 +3,7 @@
 
 namespace Dardarlt\Hangman\Game;
 
+use Dardarlt\Hangman\Game\Exception\GameIsWonException;
 use Dardarlt\Hangman\Game\Exception\NoTriesLeftException;
 use Dardarlt\Hangman\Game\Exception\GuessFailedException;
 use Dardarlt\Hangman\Game\Exception\LetterExistsException;
@@ -44,7 +45,13 @@ class HangmanGame implements \JsonSerializable, StorableInterface
             try {
                 $this->checkTries();
                 $this->guessable->guess($letter);
-                $this->setSuccessfulTry();
+                $this->setStatus(self::BUSY);
+                $this->tries--;
+                return null;
+
+            } catch (GameIsWonException $e) {
+                $this->setStatus(self::SUCCESS);
+                $this->tries--;
                 return null;
 
             } catch (LetterExistsException $e) {
@@ -52,18 +59,23 @@ class HangmanGame implements \JsonSerializable, StorableInterface
                 return null;
 
             } catch (GuessFailedException $e) {
-                //do nothing
+                $this->setStatus(self::BUSY);
+                $this->tries--;
+
+                try {
+                    $this->checkTries();
+                } catch (NoTriesLeftException $e) {
+                    $this->setStatus(self::FAIL);
+                }
+
+                return null;
 
             } catch (NoTriesLeftException $e) {
                 $this->setTries(0);
                 $this->setStatus(self::FAIL);
-                return;
+                return null;
             }
         }
-
-        $this->setFailedTry();
-        return null;
-
     }
 
     /**
@@ -136,18 +148,6 @@ class HangmanGame implements \JsonSerializable, StorableInterface
     protected function validate($letter)
     {
         return Validation::input($letter);
-    }
-
-    protected function setSuccessfulTry()
-    {
-        $this->setStatus(self::SUCCESS);
-        $this->tries--;
-    }
-
-    protected function setFailedTry()
-    {
-        $this->setStatus(self::FAIL);
-        $this->tries--;
     }
 
     public function getStateAsString()

@@ -58,11 +58,19 @@ class GuessableTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Dardarlt\Hangman\Game\Exception\LetterExistsException
-     * @throws \Dardarlt\Hangman\Game\Exception\GuessFailedException
      */
     public function testHasLetterThrowsLetterExistsException()
     {
         $guessable = new Guessable(new Word('Nyan'), ['.', '.', 'a', '.']);
+        $guessable->guess('a');
+    }
+
+    /**
+     * @expectedException \Dardarlt\Hangman\Game\Exception\GameIsWonException
+     */
+    public function testGameIsWon()
+    {
+        $guessable = new Guessable(new Word('Nyan'), ['n', 'y', '.', 'n']);
         $guessable->guess('a');
     }
 

@@ -60,10 +60,11 @@ class Hangman
     {
         $guessable = new Guessable(new Word($word), Helper::wordToSchema($state));
 
-        $hangmangame = new HangmanGame($guessable);
-        $hangmangame->setTries($tries);
-        $hangmangame->addLetter($letter);
+        $hangmanGame = new HangmanGame($guessable);
+        $hangmanGame
+            ->setTries($tries)
+            ->addLetter($letter);
 
-        return $hangmangame;
+        return $hangmanGame;
     }
 }

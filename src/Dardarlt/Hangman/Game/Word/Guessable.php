@@ -2,6 +2,7 @@
 
 namespace Dardarlt\Hangman\Game\Word;
 
+use Dardarlt\Hangman\Game\Exception\GameIsWonException;
 use Dardarlt\Hangman\Game\Exception\GuessFailedException;
 use Dardarlt\Hangman\Game\Exception\LetterExistsException;
 use Dardarlt\Hangman\Game\Validation;
@@ -36,6 +37,7 @@ class Guessable
 
     public function guess($letter)
     {
+
         if ($this->hasLetter($letter)) {
             throw new LetterExistsException(
                 sprintf(
@@ -47,6 +49,10 @@ class Guessable
 
         if ($this->word->hasLetter($letter)) {
             $this->updateSchemaWithLetter($letter);
+
+            if ($this->getWord() === $this->getState()) {
+                throw new GameIsWonException('Game ended. You won.');
+            }
         }
 
         throw new GuessFailedException(
@@ -69,7 +75,6 @@ class Guessable
             }
         }
     }
-
 
     public function getState()
     {

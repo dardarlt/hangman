@@ -111,21 +111,44 @@ class HangmanTest extends WebTestCase
         $this->assertEquals('nyan', $hangmanService->guess('Nyan', 'N...', 'a', 9)->getWordAsString());
     }
 
-    public function testGuessReturnsGameFailed()
+    public function hangmanGuessStatusesProvider()
     {
-        $hangmanService = new Hangman($this->getDictionaryStub());
-        $this->assertEquals('fail', $hangmanService->guess('Nyan', 'Nyan', 'b', 1)->getStatus());
-    }
 
-    public function testGuessReturnsGameFailedIfNoTriesLeft()
-    {
-        $hangmanService = new Hangman($this->getDictionaryStub());
-        $this->assertEquals('fail', $hangmanService->guess('Nyan', 'Nyan', 'a', 0)->getStatus());
+        return [
+            [
+                'Nyan', 'ny.n', 'b', 1, 'fail'
+            ],
+            [
+                'Nyan', 'nyan', 'a', 0, 'fail'
+            ],
+            [
+                'Bus', 'b.s', 'u', 1, 'success'
+            ],
+            [
+                'Nyan', 'ny.n', 'c', 9, 'busy'
+            ]
+        ];
     }
 
     /**
-     * @return PHPUnit_Framework_MockObject_MockObject
+     * @dataProvider hangmanGuessStatusesProvider
+     *
+     * @param $word
+     * @param $state
+     * @param $letter
+     * @param $tries
+     * @param $expectedStatus
      */
+    public function testGuessReturnsCorrectGameStatus($word, $state, $letter, $tries, $expectedStatus)
+    {
+        $hangmanService = new Hangman($this->getDictionaryStub());
+        $this->assertEquals(
+            $expectedStatus,
+            $hangmanService->guess($word, $state, $letter, $tries)->getStatus(),
+            "Guessing failes with parameters: " . var_export([$word, $state, $letter, $tries], true)
+        );
+    }
+
     protected function getDictionaryStub()
     {
         return $this->getMock('Dardarlt\Bundle\HangmanBundle\Service\Dictionary');

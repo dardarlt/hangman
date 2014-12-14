@@ -4,11 +4,10 @@
 namespace Dardarlt\Hangman\Game;
 
 use Dardarlt\Hangman\Game\Exception\GameIsWonException;
-use Dardarlt\Hangman\Game\Exception\NoTriesLeftException;
+use Dardarlt\Hangman\Game\Exception\GameEndedException;
 use Dardarlt\Hangman\Game\Exception\GuessFailedException;
 use Dardarlt\Hangman\Game\Exception\LetterExistsException;
 use Dardarlt\Hangman\Game\Word\Guessable;
-use Dardarlt\Hangman\Game\Validation;
 use Dardarlt\Hangman\Game\Word\StorableInterface;
 
 class HangmanGame implements \JsonSerializable, StorableInterface
@@ -43,7 +42,7 @@ class HangmanGame implements \JsonSerializable, StorableInterface
     {
         if ($this->validate($letter)) {
             try {
-                $this->checkTries();
+                $this->checkGameNotEnded();
                 $this->guessable->guess($letter);
                 $this->setStatus(self::BUSY);
                 return null;
@@ -59,11 +58,11 @@ class HangmanGame implements \JsonSerializable, StorableInterface
             } catch (GuessFailedException $e) {
                 $this->setStatus(self::BUSY);
                 $this->tries--;
-                $this->checkGameIsEnded();
+                $this->setGameFailedIfEnded();
 
                 return null;
 
-            } catch (NoTriesLeftException $e) {
+            } catch (GameEndedException $e) {
                 $this->setTries(0);
                 $this->setStatus(self::FAIL);
                 return null;
@@ -94,12 +93,6 @@ class HangmanGame implements \JsonSerializable, StorableInterface
         return $this;
     }
 
-    public function checkTries()
-    {
-        if ($this->getTries() < 1) {
-            throw new NoTriesLeftException();
-        }
-    }
 
     /**
      * @return int
@@ -138,14 +131,19 @@ class HangmanGame implements \JsonSerializable, StorableInterface
             ];
     }
 
-    protected function validate($letter)
+    public function checkGameIsWon()
     {
-        return Validation::input($letter);
+        return strcasecmp($this->getStateAsString(), $this->getWordAsString()) == 0;
     }
-
+    
     public function getStateAsString()
     {
         return implode('', $this->guessable->getState());
+    }
+
+    protected function validate($letter)
+    {
+        return Validation::input($letter);
     }
 
     public function getWordAsString()
@@ -153,11 +151,20 @@ class HangmanGame implements \JsonSerializable, StorableInterface
         return implode('', $this->guessable->getWord());
     }
 
-    protected function checkGameIsEnded()
+    protected function checkGameNotEnded()
+    {
+        if ($this->getTries() < 1) {
+            throw new GameEndedException();
+        } elseif ($this->guessable->hasPlayerWon()) {
+            throw new GameIsWonException();
+        }
+    }
+
+    protected function setGameFailedIfEnded()
     {
         try {
-            $this->checkTries();
-        } catch (NoTriesLeftException $e) {
+            $this->checkGameNotEnded();
+        } catch (GameEndedException $e) {
             $this->setStatus(self::FAIL);
         }
     }

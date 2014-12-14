@@ -127,7 +127,10 @@ class HangmanTest extends WebTestCase
                 'Nyan', 'nyan', 'a', 0, 'fail'
             ],
             [
-                'Bus', 'b.s', 'u', 1, 'success'
+                'Bus', 'B.s', 'u', 1, 'success'
+            ],
+            [
+                'Bus', 'bus', 'u', 1, 'success'
             ],
             [
                 'Nyan', 'ny.n', 'c', 9, 'busy'

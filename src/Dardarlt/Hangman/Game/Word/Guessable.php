@@ -50,7 +50,7 @@ class Guessable
         if ($this->word->hasLetter($letter)) {
             $this->updateSchemaWithLetter($letter);
 
-            if ($this->getWord() === $this->getState()) {
+            if ($this->hasPlayerWon()) {
                 throw new GameIsWonException('Game ended. You won.');
             }
             return null;
@@ -75,6 +75,12 @@ class Guessable
                 $this->state[$i] = $originalWord[$i];
             }
         }
+    }
+
+    public function hasPlayerWon()
+    {
+        $diff = array_udiff($this->getWord(), $this->getState(), 'strcasecmp');
+        return empty($diff);
     }
 
     public function getState()

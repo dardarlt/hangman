@@ -95,7 +95,8 @@ class HangmanTest extends WebTestCase
         $this->assertEquals(
             $expectedTries,
             $hangmanService->guess($word, $state, $letter, $tries)->getTries(),
-            "Tries counting failed with parameters: " . var_export([$word, $state, $letter, $tries, $expectedTries], true)
+            "Tries counting failed with parameters: "
+            . var_export([$word, $state, $letter, $tries, $expectedTries], true)
         );
     }
 

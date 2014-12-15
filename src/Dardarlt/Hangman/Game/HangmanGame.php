@@ -3,8 +3,8 @@
 
 namespace Dardarlt\Hangman\Game;
 
-use Dardarlt\Hangman\Game\Exception\GameIsWonException;
 use Dardarlt\Hangman\Game\Exception\GameEndedException;
+use Dardarlt\Hangman\Game\Exception\GameIsWonException;
 use Dardarlt\Hangman\Game\Exception\GuessFailedException;
 use Dardarlt\Hangman\Game\Exception\LetterExistsException;
 use Dardarlt\Hangman\Game\Word\Guessable;

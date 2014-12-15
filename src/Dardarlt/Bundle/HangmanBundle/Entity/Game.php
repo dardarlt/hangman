@@ -36,8 +36,6 @@ class Game
      */
     private $state;
 
-
-
     /**
      * @var string
      *
@@ -59,7 +57,6 @@ class Game
      */
     private $dateAdded;
 
-
     /**
      * Get id
      *
@@ -73,7 +70,7 @@ class Game
     /**
      * Set word
      *
-     * @param string $word
+     * @param  string $word
      * @return Game
      */
     public function setWord($word)
@@ -96,7 +93,7 @@ class Game
     /**
      * Set state
      *
-     * @param string $state
+     * @param  string $state
      * @return Game
      */
     public function setState($state)
@@ -119,7 +116,7 @@ class Game
     /**
      * Set tries
      *
-     * @param integer $tries
+     * @param  integer $tries
      * @return Game
      */
     public function setTries($tries)
@@ -142,7 +139,7 @@ class Game
     /**
      * Set dateAdded
      *
-     * @param \DateTime $dateAdded
+     * @param  \DateTime $dateAdded
      * @return Game
      */
     public function setDateAdded($dateAdded)
@@ -173,7 +170,7 @@ class Game
     /**
      * Set status
      *
-     * @param string $status
+     * @param  string $status
      * @return Game
      */
     public function setStatus($status)

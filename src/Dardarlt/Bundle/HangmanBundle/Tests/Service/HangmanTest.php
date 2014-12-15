@@ -4,7 +4,6 @@ namespace Dardarlt\Bundle\HangmanBundle\Tests\Service;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-use \Mockery as m;
 use \Dardarlt\Bundle\HangmanBundle\Service\Hangman;
 
 class HangmanTest extends WebTestCase
@@ -22,7 +21,6 @@ class HangmanTest extends WebTestCase
 
         $this->assertInstanceOf('\Dardarlt\Hangman\Game\HangmanGame', $hangmanService->newGame());
     }
-
 
     public function testNewGameHasDefaultTries()
     {
@@ -60,7 +58,6 @@ class HangmanTest extends WebTestCase
 
     public function hangmanGuessTriesProvider()
     {
-
         return [
             [
                 'Nyan', 'N...', 'y', 9, 9
@@ -118,7 +115,6 @@ class HangmanTest extends WebTestCase
 
     public function hangmanGuessStatusesProvider()
     {
-
         return [
             [
                 'Nyan', 'ny.n', 'b', 1, 'fail'

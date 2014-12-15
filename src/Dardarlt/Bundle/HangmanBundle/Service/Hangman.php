@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Dardarlt\Bundle\HangmanBundle\Service;
 
 use Dardarlt\Hangman\Game\HangmanGame;
@@ -31,6 +30,7 @@ class Hangman
     {
         $word = $this->dictionary->pickRandom();
         $guessable = new Guessable(new Word($word));
+
         return new HangmanGame($guessable);
     }
 
@@ -45,6 +45,7 @@ class Hangman
         $hangmanGame = new HangmanGame(
             new Guessable(new Word($word), Helper::wordToSchema($state))
         );
+
         return $hangmanGame;
     }
 

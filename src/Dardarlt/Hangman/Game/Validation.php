@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Dardarlt\Hangman\Game;
 
 class Validation

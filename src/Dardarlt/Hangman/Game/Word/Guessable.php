@@ -19,7 +19,7 @@ class Guessable
     protected $state;
 
     /**
-     * @param Word $word original word object
+     * @param Word  $word  original word object
      * @param array $state represents current game state
      *
      * We do not pass any state, if word is newly created as it does not have any
@@ -53,6 +53,7 @@ class Guessable
             if ($this->hasPlayerWon()) {
                 throw new GameIsWonException('Game ended. You won.');
             }
+
             return null;
         }
 
@@ -80,6 +81,7 @@ class Guessable
     public function hasPlayerWon()
     {
         $diff = array_udiff($this->getWord(), $this->getState(), 'strcasecmp');
+
         return empty($diff);
     }
 

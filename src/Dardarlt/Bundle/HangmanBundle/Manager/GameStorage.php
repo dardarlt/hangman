@@ -23,6 +23,7 @@ class GameStorage
     public function storeAndReturnId(GameEntity $game)
     {
         $this->saveEntity($game);
+
         return $game->getId();
     }
 
@@ -30,7 +31,7 @@ class GameStorage
     {
         return $this->getRepository()->findAll();
     }
-    
+
     public function get($id)
     {
         return $this->getRepository()->find($id);
@@ -39,6 +40,7 @@ class GameStorage
     protected function getRepository()
     {
         $entityManager = $this->managerRegistry->getManagerForClass('Dardarlt\Bundle\HangmanBundle\Entity\Game');
+
         return $entityManager->getRepository('DardarltHangmanBundle:Game');
     }
 

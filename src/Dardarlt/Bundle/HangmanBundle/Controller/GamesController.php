@@ -20,7 +20,7 @@ class GamesController extends Controller
         $hangman =  $this->get('hm.hangman_manager')->newGame();
 
         $gameEntity = $this->convertGameEntity($hangman);
-        
+
         return new JsonResponse(
             [
                 'id' =>  $this->get('hm.storage_manager')->storeAndReturnId($gameEntity),
@@ -125,6 +125,7 @@ class GamesController extends Controller
             ->setState($hangman->getStateAsString())
             ->setTries($hangman->getTries())
             ->setStatus($hangman->getStatus());
+
         return $gameEntity;
     }
 

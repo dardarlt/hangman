@@ -3,8 +3,8 @@
 
 namespace Dardarlt\Hangman\Game;
 
-use Dardarlt\Hangman\Game\Exception\GameIsWonException;
 use Dardarlt\Hangman\Game\Exception\GameEndedException;
+use Dardarlt\Hangman\Game\Exception\GameIsWonException;
 use Dardarlt\Hangman\Game\Exception\GuessFailedException;
 use Dardarlt\Hangman\Game\Exception\LetterExistsException;
 use Dardarlt\Hangman\Game\Word\Guessable;
@@ -121,6 +121,8 @@ class HangmanGame implements \JsonSerializable, StorableInterface
      * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
      * @return mixed data which can be serialized by <b>json_encode</b>,
      * which is a value of any type other than a resource.
+     *
+     * @return array
      */
     public function jsonSerialize()
     {

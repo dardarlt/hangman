@@ -3,8 +3,8 @@
 
 namespace Dardarlt\Hangman\Tests\Game;
 
-use Dardarlt\Hangman\Game\Word\Guessable;
 use Dardarlt\Hangman\Game\HangmanGame;
+use Dardarlt\Hangman\Game\Word\Guessable;
 use Dardarlt\Hangman\Game\Word\Word;
 
 class HangmanGameTest extends \PHPUnit_Framework_TestCase

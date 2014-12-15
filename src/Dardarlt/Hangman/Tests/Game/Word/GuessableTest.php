@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Dardarlt\Hangman\Tests\Game\Word;
 
 use Dardarlt\Hangman\Game\Exception\LetterExistsException;

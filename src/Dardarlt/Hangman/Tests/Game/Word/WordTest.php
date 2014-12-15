@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Dardarlt\Hangman\Tests\Game\Word;
 
 use Dardarlt\Hangman\Game\Word\Word;
@@ -67,6 +66,7 @@ class WordTest extends \PHPUnit_Framework_TestCase
                 'n'
             ],
         ];
+
         return $out;
 
     }

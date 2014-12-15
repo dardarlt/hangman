@@ -158,7 +158,7 @@ class HangmanTest extends WebTestCase
     }
 
     /**
-     * @return \Dardarlt\Bundle\HangmanBundle\Service\Dictionary
+     * @return \PHPUnit_Framework_MockObject_MockObject
      */
     protected function getDictionaryStub()
     {

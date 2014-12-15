@@ -58,6 +58,8 @@ class WordTest extends \PHPUnit_Framework_TestCase
 
     public function getSchemaProvider()
     {
+        $out = [];
+
         $out[] = [
             'Nyan',
             [

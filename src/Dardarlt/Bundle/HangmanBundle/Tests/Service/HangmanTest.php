@@ -162,6 +162,9 @@ class HangmanTest extends WebTestCase
      */
     protected function getDictionaryStub()
     {
-        return $this->getMock('Dardarlt\Bundle\HangmanBundle\Service\Dictionary');
+        return $this
+            ->getMockBuilder('Dardarlt\Bundle\HangmanBundle\Service\Dictionary')
+            ->disableOriginalConstructor()
+            ->getMock();
     }
 }

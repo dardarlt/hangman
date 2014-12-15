@@ -6,7 +6,7 @@ services:
 
     hm.dictionary:
         class: Dardarlt\Bundle\HangmanBundle\Service\Dictionary
-        arguments: ["@kernel"]
+        arguments: [@kernel]
 
     hm.hangman_manager:
         class: Dardarlt\Bundle\HangmanBundle\Service\Hangman

@@ -7,10 +7,6 @@ application:
         before:
             - cp app/config/parameters.yml.dist app/config/parameters.yml
             - composer install --prefer-dist --no-interaction
-build:
-    dependencies:
-        before:
-            - composer install --prefer-dist
 
 filter:
     paths: [src/*]

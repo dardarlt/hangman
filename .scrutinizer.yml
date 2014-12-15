@@ -1,3 +1,16 @@
+# .scrutinizer.yml
+application:
+    environment:
+        php:
+            version: 5.4.0
+    project_setup:
+        before:
+            - mysql -u root -proot -e "CREATE DATABASE hangman"
+build:
+    dependencies:
+        before:
+            - composer install --prefer-dist
+
 filter:
     paths: [src/*]
     excluded_paths: [vendor/*]

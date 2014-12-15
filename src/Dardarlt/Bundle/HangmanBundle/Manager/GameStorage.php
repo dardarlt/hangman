@@ -15,10 +15,15 @@ class GameStorage
         $this->managerRegistry = $managerRegistry;
     }
 
+    /**
+     * Store Game entity
+     * @param GameEntity $game
+     */
     public function store(GameEntity $game)
     {
         $this->saveEntity($game);
     }
+
 
     public function storeAndReturnId(GameEntity $game)
     {

@@ -7,6 +7,16 @@ use Symfony\Component\Finder\Finder;
 
 class Dictionary
 {
+    protected $kernel;
+
+    public function __construct(\AppKernel $kernel)
+    {
+        $this->kernel = $kernel;
+    }
+
+    /**
+     * @return string
+     */
     public function pickRandom()
     {
         $fileContent =  $this->getDictionary();
@@ -15,16 +25,12 @@ class Dictionary
         return $words[$randomize];
     }
 
+    /**
+     * @return string
+     */
     public function getDictionary()
     {
-        $finder = new Finder();
-        $finder->files()->in(__DIR__ . '/../Resources/dict/');
-
-        $file = '';
-        foreach ($finder as $file) {
-            $file .=  $file->getContents();
-        }
-
-        return $file;
+        $filePath = $this->kernel->locateResource('@DardarltHangmanBundle/Resources/dict/words.english');
+        return file_get_contents($filePath);
     }
 }

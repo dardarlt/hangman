@@ -11,3 +11,6 @@
 /bin/
 /composer.phar
 /web/bundles
+
+#.htaccess should be created by server
+.htaccess

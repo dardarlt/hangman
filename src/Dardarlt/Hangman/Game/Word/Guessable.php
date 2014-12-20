@@ -87,8 +87,7 @@ class Guessable
 
     protected function checkHasLetter($letter)
     {
-        if (Validation::hasLetter($letter, $this->state))
-        {
+        if (Validation::hasLetter($letter, $this->state)) {
             throw new LetterExistsException(
                 sprintf(
                     "Letter %s already exists in current word.",

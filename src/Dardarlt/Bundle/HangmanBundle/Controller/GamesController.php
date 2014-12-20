@@ -125,7 +125,8 @@ class GamesController extends Controller
             [
                 'error' => true,
                 'message' => $message
-            ]
+            ],
+            404
         );
     }
 

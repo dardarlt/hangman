@@ -1,0 +1,11 @@
+symfony.setup:
+	[ -f /etc/hosts ] && echo "parameters.yml exists, skipping." || cp app/config/parameters.yml.dist app/config/parameters.yml
+	composer install --prefer-dist --no-interaction
+	php app/console doctrine:database:create --no-interaction
+	php app/console doctrine:schema:update --force
+
+build.assets:
+	php app/console assetic:dump
+	git add web/css/*
+	git add web/js/*
+	git commit -m "Web assets added" web/

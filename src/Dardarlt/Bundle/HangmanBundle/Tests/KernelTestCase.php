@@ -24,7 +24,7 @@ abstract class KernelTestCase extends WebTestCase
     }
 
     /**
-    * Ensure kernel is shudowned
+    * Ensure kernel has been shutdown
     */
     public function tearDown()
     {
@@ -36,8 +36,8 @@ abstract class KernelTestCase extends WebTestCase
     }
 
     /**
-    * Initialize database
-    */
+     * Initialize database
+     */
     protected function databaseInit()
     {
         static::$entityManager = static::$kernel
@@ -56,9 +56,9 @@ abstract class KernelTestCase extends WebTestCase
     /**
     * Executes a console command
     *
-    * @param type $command
+    * @param string $command
     * @param array $options
-    * @return type integer
+    * @return string integer
     */
     protected function runConsole($command, array $options = array())
     {

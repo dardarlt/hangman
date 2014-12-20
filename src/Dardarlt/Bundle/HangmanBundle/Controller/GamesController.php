@@ -76,7 +76,6 @@ class GamesController extends Controller
     public function guessAction($id, Request $request)
     {
         $gameEntity = $this->get('hm.storage_manager')->get($id);
-        $letter = $request->request->get('char');
 
         if (!$gameEntity) {
             return $this->notFoundResponse('Game does not exist');
@@ -85,19 +84,11 @@ class GamesController extends Controller
         $hangman =  $this->get('hm.hangman_manager')->guess(
             $gameEntity->getWord(),
             $gameEntity->getState(),
-            $letter,
+            $request->request->get('char'),
             $gameEntity->getTries()
         );
 
-        $gameEntity
-            ->setState($hangman->getStateAsString())
-            ->setStatus($hangman->getStatus())
-            ->setTries($hangman->getTries());
-
-        $this
-            ->get('hm.storage_manager')
-            ->store($gameEntity)
-        ;
+        $this->saveStoreHangmanAsGame($gameEntity, $hangman);
 
         return new JsonResponse(
             [
@@ -136,5 +127,21 @@ class GamesController extends Controller
                 'message' => $message
             ]
         );
+    }
+
+    /**
+     * @param $gameEntity
+     * @param $hangman
+     */
+    protected function saveStoreHangmanAsGame($gameEntity, $hangman)
+    {
+        $gameEntity
+            ->setState($hangman->getStateAsString())
+            ->setStatus($hangman->getStatus())
+            ->setTries($hangman->getTries());
+
+        $this
+            ->get('hm.storage_manager')
+            ->store($gameEntity);
     }
 }

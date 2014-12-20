@@ -37,15 +37,7 @@ class Guessable
 
     public function guess($letter)
     {
-
-        if ($this->hasLetter($letter)) {
-            throw new LetterExistsException(
-                sprintf(
-                    "Letter %s already exists in current word.",
-                    $letter
-                )
-            );
-        }
+        $this->checkHasLetter($letter);
 
         if ($this->word->hasLetter($letter)) {
             $this->updateSchemaWithLetter($letter);
@@ -93,8 +85,16 @@ class Guessable
         return $this->word->getSchema();
     }
 
-    protected function hasLetter($letter)
+    protected function checkHasLetter($letter)
     {
-        return Validation::hasLetter($letter, $this->state);
+        if (Validation::hasLetter($letter, $this->state))
+        {
+            throw new LetterExistsException(
+                sprintf(
+                    "Letter %s already exists in current word.",
+                    $letter
+                )
+            );
+        }
     }
 }

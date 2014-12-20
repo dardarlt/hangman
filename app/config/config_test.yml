@@ -17,7 +17,8 @@ swiftmailer:
 
 doctrine:
     dbal:
-        host:     127.0.0.1
-        dbname:   hangman_testdb
-        user:     root
-        password: root
+        driver: pdo_sqlite
+        path: %kernel.root_dir%/../data/%kernel.environment%/database.sqlite
+    orm:
+        auto_generate_proxy_classes: true
+        auto_mapping: true

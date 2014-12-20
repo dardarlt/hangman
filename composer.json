@@ -2,7 +2,15 @@
     "name": "symfony/framework-standard-edition",
     "license": "MIT",
     "type": "project",
-    "description": "The \"Symfony Standard Edition\" distribution",
+    "description": "Hangman game API using symfony2 framework",
+    "authors": [
+        {
+            "name": "Darius Kasperavicius",
+            "email": "darius@foxrate.de",
+            "homepage": "http://darius.kasperavicius.lt",
+            "role": "Developer"
+        }
+    ],
     "autoload": {
         "psr-0": { "": "src/", "SymfonyStandard": "app/" }
     },

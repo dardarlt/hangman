@@ -53,16 +53,24 @@ class GuessableTest extends \PHPUnit_Framework_TestCase
     public function testStateIsStored($original, $state, $expected)
     {
         $guessable = new Guessable(new Word($original), $state);
-        $this->assertSame($expected, $guessable->getRepresentation());
+        $this->assertSame($expected, $guessable->getState());
     }
 
     /**
      * @expectedException \Dardarlt\Hangman\Game\Exception\LetterExistsException
-     * @throws \Dardarlt\Hangman\Game\Exception\GuessFailedException
      */
     public function testHasLetterThrowsLetterExistsException()
     {
         $guessable = new Guessable(new Word('Nyan'), ['.', '.', 'a', '.']);
+        $guessable->guess('a');
+    }
+
+    /**
+     * @expectedException \Dardarlt\Hangman\Game\Exception\GameIsWonException
+     */
+    public function testFullWordIsGuessed()
+    {
+        $guessable = new Guessable(new Word('Nyan'), ['n', 'y', '.', 'n']);
         $guessable->guess('a');
     }
 
@@ -100,10 +108,10 @@ class GuessableTest extends \PHPUnit_Framework_TestCase
      * @dataProvider addUpdateSchemaWithLetter
      * @param $letter
      */
-    public function testGetRepresentation($word, $letter, $expectedResult)
+    public function testGetState($word, $letter, $expectedResult)
     {
         $guessable = new Guessable(new Word($word));
         $guessable->updateSchemaWithLetter($letter);
-        $this->assertSame($expectedResult, $guessable->getRepresentation());
+        $this->assertSame($expectedResult, $guessable->getState());
     }
 }

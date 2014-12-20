@@ -3,16 +3,16 @@
 namespace Dardarlt\Bundle\HangmanBundle\Manager;
 
 use Dardarlt\Bundle\HangmanBundle\Entity\Game as GameEntity;
-use Doctrine\ORM\EntityManager;
+use Doctrine\Common\Persistence\ManagerRegistry;
 
 class GameStorage
 {
 
-    private $entityManager;
+    private $managerRegistry;
 
-    public function __construct(EntityManager $entityManager)
+    public function __construct(ManagerRegistry $managerRegistry)
     {
-        $this->entityManager = $entityManager;
+        $this->managerRegistry = $managerRegistry;
     }
 
     public function store(GameEntity $game)
@@ -38,12 +38,17 @@ class GameStorage
 
     protected function getRepository()
     {
-        return $this->entityManager->getRepository('DardarltHangmanBundle:Game');
+        $entityManager = $this->managerRegistry->getManagerForClass('Dardarlt\Bundle\HangmanBundle\Entity\Game');
+        return $entityManager->getRepository('DardarltHangmanBundle:Game');
     }
 
+    /**
+     * @param GameEntity $entity
+     */
     protected function saveEntity($entity)
     {
-        $this->entityManager->persist($entity);
-        $this->entityManager->flush();
+        $entityManager = $this->managerRegistry->getManagerForClass(get_class($entity));
+        $entityManager->persist($entity);
+        $entityManager->flush();
     }
 }

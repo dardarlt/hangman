@@ -8,11 +8,6 @@ use Dardarlt\Hangman\Game\Word\Word;
 class WordTest extends \PHPUnit_Framework_TestCase
 {
 
-    public function testWorks()
-    {
-        $this->assertTrue(true);
-    }
-
     public function testGetSchemaIsArray()
     {
         $word = new \Dardarlt\Hangman\Game\Word\Word("Nyan");
@@ -21,6 +16,9 @@ class WordTest extends \PHPUnit_Framework_TestCase
 
     public function getMaskProvider()
     {
+
+        $out = [];
+
         $out[] = [
         'Nyan',
             [
@@ -60,6 +58,8 @@ class WordTest extends \PHPUnit_Framework_TestCase
 
     public function getSchemaProvider()
     {
+        $out = [];
+
         $out[] = [
             'Nyan',
             [

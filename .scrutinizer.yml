@@ -1,8 +1,17 @@
+# .scrutinizer.yml
+application:
+    environment:
+        php:
+            version: 5.5.14
+    project_setup:
+        before:
+            - cp app/config/parameters.yml.dist app/config/parameters.yml
+            - composer install --prefer-dist --no-interaction
+
 filter:
     paths: [src/*]
     excluded_paths: [vendor/*]
-before_commands:
-    - 'composer install --dev --prefer-dist'
+
 tools:
     external_code_coverage:
         timeout: 600    # Timeout in seconds.

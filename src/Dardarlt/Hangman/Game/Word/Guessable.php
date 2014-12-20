@@ -2,6 +2,7 @@
 
 namespace Dardarlt\Hangman\Game\Word;
 
+use Dardarlt\Hangman\Game\Exception\GameIsWonException;
 use Dardarlt\Hangman\Game\Exception\GuessFailedException;
 use Dardarlt\Hangman\Game\Exception\LetterExistsException;
 use Dardarlt\Hangman\Game\Validation;
@@ -36,7 +37,8 @@ class Guessable
 
     public function guess($letter)
     {
-        if ($this->hasStateLetter($letter)) {
+
+        if ($this->hasLetter($letter)) {
             throw new LetterExistsException(
                 sprintf(
                     "Letter %s already exists in current word.",
@@ -47,6 +49,11 @@ class Guessable
 
         if ($this->word->hasLetter($letter)) {
             $this->updateSchemaWithLetter($letter);
+
+            if ($this->hasPlayerWon()) {
+                throw new GameIsWonException('Game ended. You won.');
+            }
+            return null;
         }
 
         throw new GuessFailedException(
@@ -62,19 +69,31 @@ class Guessable
         $originalWord = $this->word->getSchema();
         $positions = array_keys($originalWord, $replaceLetter);
 
-        for ($i = 0; $i < count($this->state); $i++) {
+        $length = count($this->state);
+        for ($i = 0; $i < $length; $i++) {
             if (in_array($i, $positions)) {
                 $this->state[$i] = $originalWord[$i];
             }
         }
     }
 
-    public function getRepresentation()
+    public function hasPlayerWon()
+    {
+        $diff = array_udiff($this->getWord(), $this->getState(), 'strcasecmp');
+        return empty($diff);
+    }
+
+    public function getState()
     {
         return $this->state;
     }
 
-    protected function hasStateLetter($letter)
+    public function getWord()
+    {
+        return $this->word->getSchema();
+    }
+
+    protected function hasLetter($letter)
     {
         return Validation::hasLetter($letter, $this->state);
     }

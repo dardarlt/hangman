@@ -3,18 +3,15 @@
 namespace Dardarlt\Bundle\HangmanBundle\Tests\Controller;
 
 use Dardarlt\Bundle\HangmanBundle\Tests\KernelTestCase;
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class GameControllerTest extends KernelTestCase
 {
-    public function testIndex()
+    public function testNewGameActionReturnsJsonResponse()
     {
         $client = static::createClient();
 
-        $crawler = $client->request('POST', '/api/games');
-        //var_dump($client->getResponse()->getContent());
-        //var_dump($crawler);
-        $client->getResponse()->getContent();
+        $client->request('POST', '/api/games');
+
         $this->assertTrue(
             $client->getResponse()->headers->contains(
                 'Content-Type',

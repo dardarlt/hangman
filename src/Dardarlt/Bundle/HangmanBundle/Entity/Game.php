@@ -36,8 +36,6 @@ class Game
      */
     private $state;
 
-
-
     /**
      * @var string
      *

@@ -16,30 +16,26 @@ class WordTest extends \PHPUnit_Framework_TestCase
 
     public function getMaskProvider()
     {
-
-        $out = [];
-
-        $out[] = [
-        'Nyan',
+        return
             [
-                Word::MASK,
-                Word::MASK,
-                Word::MASK,
-                Word::MASK
-            ],
+                [
+                    'Nyan',
+                        [
+                            Word::MASK,
+                            Word::MASK,
+                            Word::MASK,
+                            Word::MASK
+                        ],
+                ],
+                [
+                    'Cat',
+                    [
+                        Word::MASK,
+                        Word::MASK,
+                        Word::MASK
+                    ],
+                ]
         ];
-
-        $out[] = [
-            'Cat',
-            [
-                Word::MASK,
-                Word::MASK,
-                Word::MASK
-            ],
-        ];
-
-        return $out;
-
     }
 
     /**
@@ -89,28 +85,23 @@ class WordTest extends \PHPUnit_Framework_TestCase
 
     public function hasLetterProvider()
     {
-        $out = [];
-
-        $out[] = [
-            'abc',
-            'a',
-            true
+        return [
+            [
+                'abc',
+                'a',
+                true
+            ],
+            [
+                'abc',
+                'A',
+                true
+            ],
+            [
+                'abc',
+                'd',
+                false
+            ]
         ];
-
-        $out[] = [
-            'abc',
-            'A',
-            true
-        ];
-
-        $out[] = [
-            'abc',
-            'd',
-            false
-        ];
-
-        return $out;
-
     }
 
     /**

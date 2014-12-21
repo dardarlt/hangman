@@ -87,15 +87,15 @@ class GuessableTest extends \PHPUnit_Framework_TestCase
                     'a',
                     Word::MASK,
                 ],
+            ],
+            [
+                'Nyan',
+                'n',
                 [
-                    'Nyan',
                     'n',
-                    [
-                        'n',
-                        Word::MASK,
-                        Word::MASK,
-                        'n',
-                    ]
+                    Word::MASK,
+                    Word::MASK,
+                    'n',
                 ]
             ]
         ];

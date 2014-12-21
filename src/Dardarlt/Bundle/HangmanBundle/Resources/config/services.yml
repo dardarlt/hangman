@@ -1,3 +1,6 @@
+parameters:
+    hm.hangman_manager.class: Dardarlt\Bundle\HangmanBundle\Service\Hangman
+
 services:
     hm.storage_manager:
         class: Dardarlt\Bundle\HangmanBundle\Manager\GameStorage
@@ -9,5 +12,5 @@ services:
         arguments: [@kernel]
 
     hm.hangman_manager:
-        class: Dardarlt\Bundle\HangmanBundle\Service\Hangman
+        class: %hm.hangman_manager.class%
         arguments: ["@hm.dictionary"]

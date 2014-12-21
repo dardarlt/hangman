@@ -2,6 +2,7 @@
 
 namespace Dardarlt\Bundle\HangmanBundle\Tests\Controller;
 
+use Dardarlt\Bundle\HangmanBundle\Entity\Game;
 use Dardarlt\Bundle\HangmanBundle\Tests\KernelTestCase;
 
 class GameControllerTest extends KernelTestCase
@@ -37,8 +38,27 @@ class GameControllerTest extends KernelTestCase
     public function testGameReturnsRequestSucceededHeader()
     {
         $client = static::createClient();
-        $client->request('POST', '/api/games');
-        $client->request('GET', '/api/games/9999');
+
+        $hangman  = $this->hangmanStorageServiceMock();
+        $hangman
+            ->expects($this->once())
+            ->method('get')
+            ->willReturn(
+                $this->getGameEntityMock()
+            )
+        ;
+
+        static::$kernel->getContainer()->set('hm.storage_manager', $hangman);
+
+        $client->request('GET', '/api/games/1');
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+    }
+
+    public function testGameReturnsRequestNotFoundHeader()
+    {
+        $client = static::createClient();
+        $client->request('GET', '/api/games/1');
 
         $this->assertEquals(404, $client->getResponse()->getStatusCode());
     }
@@ -69,5 +89,36 @@ class GameControllerTest extends KernelTestCase
                 'application/json'
             )
         );
+    }
+
+    protected function getGameEntityMock()
+    {
+        $game = $this
+            ->getMockBuilder('Dardarlt\Bundle\HangmanBundle\Entity\Game')
+            ->getMock()
+        ;
+
+        $game
+            ->expects($this->atLeastOnce())
+            ->method('getWord')
+            ->willReturn('Test')
+        ;
+
+        $game
+            ->expects($this->atLeastOnce())
+            ->method('getState')
+            ->willReturn('Test')
+        ;
+
+        return $game;
+    }
+    
+    protected function hangmanStorageServiceMock()
+    {
+        return $this
+            ->getMockBuilder('Dardarlt\Bundle\HangmanBundle\Manager\GameStorage')
+            ->disableOriginalConstructor()
+            ->getMock()
+        ;
     }
 }

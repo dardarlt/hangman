@@ -64,6 +64,8 @@ class Game
      * Get id
      *
      * @return integer
+     *
+     * @codeCoverageIgnore
      */
     public function getId()
     {
@@ -75,6 +77,8 @@ class Game
      *
      * @param string $word
      * @return Game
+     *
+     * @codeCoverageIgnore
      */
     public function setWord($word)
     {
@@ -87,6 +91,8 @@ class Game
      * Get word
      *
      * @return string
+     *
+     * @codeCoverageIgnore
      */
     public function getWord()
     {
@@ -98,6 +104,8 @@ class Game
      *
      * @param string $state
      * @return Game
+     *
+     * @codeCoverageIgnore
      */
     public function setState($state)
     {
@@ -110,6 +118,8 @@ class Game
      * Get state
      *
      * @return string
+     *
+     * @codeCoverageIgnore
      */
     public function getState()
     {
@@ -121,6 +131,8 @@ class Game
      *
      * @param integer $tries
      * @return Game
+     *
+     * @codeCoverageIgnore
      */
     public function setTries($tries)
     {
@@ -133,6 +145,8 @@ class Game
      * Get tries
      *
      * @return integer
+     *
+     * @codeCoverageIgnore
      */
     public function getTries()
     {
@@ -144,6 +158,8 @@ class Game
      *
      * @param \DateTime $dateAdded
      * @return Game
+     *
+     * @codeCoverageIgnore
      */
     public function setDateAdded($dateAdded)
     {
@@ -156,6 +172,8 @@ class Game
      * Get dateAdded
      *
      * @return \DateTime
+     *
+     * @codeCoverageIgnore
      */
     public function getDateAdded()
     {
@@ -164,6 +182,8 @@ class Game
 
     /**
      * @return string
+     *
+     * @codeCoverageIgnore
      */
     public function getStatus()
     {
@@ -175,6 +195,8 @@ class Game
      *
      * @param string $status
      * @return Game
+     *
+     * @codeCoverageIgnore
      */
     public function setStatus($status)
     {
@@ -185,6 +207,8 @@ class Game
 
     /**
      *  @ORM\PrePersist
+     *
+     * @codeCoverageIgnore
      */
     public function doStuffOnPrePersist()
     {

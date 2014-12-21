@@ -40,33 +40,35 @@ class HangmanGame implements \JsonSerializable, StorableInterface
 
     public function addLetter($letter)
     {
-        if ($this->validate($letter)) {
-            try {
-                $this->checkGameNotEnded();
-                $this->guessable->guess($letter);
-                $this->setStatus(self::BUSY);
-                return null;
+        if (!$this->validate($letter)) {
+            return null;
+        }
 
-            } catch (GameIsWonException $e) {
-                $this->setStatus(self::SUCCESS);
-                return null;
+        try {
+            $this->checkGameNotEnded();
+            $this->guessable->guess($letter);
+            $this->setStatus(self::BUSY);
+            return null;
 
-            } catch (LetterExistsException $e) {
-                $this->setStatus(self::BUSY);
-                return null;
+        } catch (GameIsWonException $e) {
+            $this->setStatus(self::SUCCESS);
+            return null;
 
-            } catch (GuessFailedException $e) {
-                $this->setStatus(self::BUSY);
-                $this->tries--;
-                $this->setGameFailedIfEnded();
+        } catch (LetterExistsException $e) {
+            $this->setStatus(self::BUSY);
+            return null;
 
-                return null;
+        } catch (GuessFailedException $e) {
+            $this->setStatus(self::BUSY);
+            $this->tries--;
+            $this->setGameFailedIfEnded();
 
-            } catch (GameEndedException $e) {
-                $this->setTries(0);
-                $this->setStatus(self::FAIL);
-                return null;
-            }
+            return null;
+
+        } catch (GameEndedException $e) {
+            $this->setTries(0);
+            $this->setStatus(self::FAIL);
+            return null;
         }
     }
 

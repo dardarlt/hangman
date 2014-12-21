@@ -11,37 +11,34 @@ class GuessableTest extends \PHPUnit_Framework_TestCase
 {
     public function statesProvider()
     {
-        $out = [];
-
-        $out[] = [
-            'Nyan',
+        return
+        [
             [
-                'n',
-                Word::MASK,
-                Word::MASK,
-                'n',
+                'Nyan',
+                [
+                    'n',
+                    Word::MASK,
+                    Word::MASK,
+                    'n',
+                ],
+                [
+                    'n',
+                    Word::MASK,
+                    Word::MASK,
+                    'n',
+                ]
             ],
             [
-                'n',
-                Word::MASK,
-                Word::MASK,
-                'n',
+                'Nyan',
+                null,
+                [
+                    Word::MASK,
+                    Word::MASK,
+                    Word::MASK,
+                    Word::MASK,
+                ]
             ]
         ];
-
-        $out[] = [
-            'Nyan',
-            null,
-            [
-                Word::MASK,
-                Word::MASK,
-                Word::MASK,
-                Word::MASK,
-            ]
-        ];
-
-        return $out;
-
     }
 
     /**

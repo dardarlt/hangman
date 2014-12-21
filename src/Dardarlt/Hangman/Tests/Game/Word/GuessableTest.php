@@ -74,38 +74,35 @@ class GuessableTest extends \PHPUnit_Framework_TestCase
         $guessable->guess('a');
     }
 
-    public function addUpdateSchemaWithLetter()
+    public function addUpdateSchemaWithLetterProvider()
     {
-        $out = [];
-
-        $out[] = [
-            'Nyan',
-            'a',
+        return
+        [
             [
-                Word::MASK,
-                Word::MASK,
+                'Nyan',
                 'a',
-                Word::MASK,
+                [
+                    Word::MASK,
+                    Word::MASK,
+                    'a',
+                    Word::MASK,
+                ],
+                [
+                    'Nyan',
+                    'n',
+                    [
+                        'n',
+                        Word::MASK,
+                        Word::MASK,
+                        'n',
+                    ]
+                ]
             ]
         ];
-
-        $out[] = [
-            'Nyan',
-            'n',
-            [
-                'n',
-                Word::MASK,
-                Word::MASK,
-                'n',
-            ]
-        ];
-
-        return $out;
-
     }
 
     /**
-     * @dataProvider addUpdateSchemaWithLetter
+     * @dataProvider addUpdateSchemaWithLetterProvider
      * @param $letter
      */
     public function testGetState($word, $letter, $expectedResult)
